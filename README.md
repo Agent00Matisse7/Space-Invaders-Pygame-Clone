@@ -48,6 +48,7 @@ ambient_space.wav (Background music - or similar name)
 shoot.wav (Bullet sound effect)
 
 explosion.wav (Game over/collision sound effect)
+## Extra images added for more customization 
 
 Run the Script:
 
