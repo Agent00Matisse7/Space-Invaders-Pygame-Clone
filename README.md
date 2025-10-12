@@ -1,10 +1,10 @@
-🚀 Space Invaders Pygame Clone
+ ##🚀 Space Invaders Pygame Clone
 A classic arcade-style shooter built using the Pygame library in Python. Defend the earth against an endless wave of invaders!
 
-🌟 Features
+##🌟 Features
 Real-time Movement: Smooth player movement and responsive controls.
 
-Dynamic Invaders: Enemies move back and forth, descending with each boundary hit.
+👽 Dynamic Invaders: Enemies move back and forth, descending with each boundary hit.
 
 Collision Detection: Accurate hit detection for bullets and invaders.
 
@@ -14,7 +14,7 @@ Game Over Condition: The game ends if an invader reaches the player's line.
 
 Sound Effects: Background music, shooting sounds, and an explosion effect (requires local sound files).
 
-💻 Requirements
+##💻 Requirements
 To run this game locally, you need:
 
 Python 3 (version 3.6 or newer recommended).
@@ -27,7 +27,7 @@ Install Pygame using pip:
 pip install pygame
 
 
-🛠️ Setup and Running the Game
+##🛠️ Setup and Running the Game
 
 
 Ensure Assets Are Present:
