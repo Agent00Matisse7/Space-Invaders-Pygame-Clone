@@ -28,10 +28,6 @@ pip install pygame
 
 
 🛠️ Setup and Running the Game
-Clone the Repository (or download the files):
-
-git clone [https://github.com/YOUR_USERNAME/Space-Invaders-Pygame.git](https://github.com/YOUR_USERNAME/Space-Invaders-Pygame.git)
-cd Space-Invaders-Pygame
 
 
 Ensure Assets Are Present:
