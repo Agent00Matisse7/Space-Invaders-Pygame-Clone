@@ -3,7 +3,7 @@ import math
 import random
 from pygame import mixer
 
-# --- 1. Initialization ---
+#  Initialization
 pygame.init()
 
 # Define screen dimensions
@@ -12,19 +12,13 @@ screen_height = 600
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("WELCOME TO SPACE INVADERS")
 
-# --- 2. Assets & Sound Loading ---
-# NOTE: The absolute paths in your original code are commented out.
-# For others to run this, you MUST put your image and sound files (e.g., play@2x.png, shoot.wav)
-# into the same folder as this Python script, and use the simple filenames below.
 
-# Load Images (Using placeholders/simple filenames)
 try:
     playerImage = pygame.image.load('play@2x.png')
     bulletImage = pygame.image.load('player_shot@2x.png')
     invader_template_image = pygame.image.load('inv22@2x.png')
 except pygame.error as e:
     print(f"Error loading assets. Ensure images are in the same folder as the script: {e}")
-    # Create simple placeholder surfaces if assets fail to load
     playerImage = pygame.Surface((64, 64), pygame.SRCALPHA)
     playerImage.fill((0, 255, 0))  # Green placeholder
     bulletImage = pygame.Surface((16, 32), pygame.SRCALPHA)
@@ -32,10 +26,9 @@ except pygame.error as e:
     invader_template_image = pygame.Surface((64, 64), pygame.SRCALPHA)
     invader_template_image.fill((255, 0, 0))  # Red placeholder
 
-# Load Sounds (Move sound loading outside the loop for efficiency)
 try:
     # Mixer Music (background)
-    mixer.music.load('ambient_space.wav')  # Placeholder name for your background music
+    mixer.music.load('ambient_space.wav') 
     mixer.music.play(-1)
 
     # Sound effects
@@ -43,7 +36,6 @@ try:
     explosion_sound = mixer.Sound('explosion.wav')
 except pygame.error as e:
     print(f"Error loading sounds: {e}")
-    # Use dummy functions if sound files are missing
     bullet_sound = lambda: None
     explosion_sound = lambda: None
 
@@ -55,7 +47,7 @@ except pygame.error as e:
     bullet_sound.play = dummy_play
     explosion_sound.play = dummy_play
 
-# --- 3. Score and Fonts ---
+# Score and Fonts 
 score_val = 0
 scoreX = 5
 scoreY = 5
@@ -70,23 +62,21 @@ def show_score(x, y):
 
 def game_over():
     game_over_text = game_over_font.render("GAME OVER", True, (255, 255, 255))
-    # Center the text
     text_rect = game_over_text.get_rect(center=(screen_width // 2, screen_height // 2))
     screen.blit(game_over_text, text_rect)
 
 
-# --- 4. Player Setup ---
+# Player Setup 
 player_X = 370
 player_Y = screen_height - 77
 player_Xchange = 0
 
 
 def player(x, y):
-    # Adjusted position slightly based on original logic
     screen.blit(playerImage, (x - 16, y + 10))
 
 
-# --- 5. Invader Setup ---
+# Invader Setup
 invaderImage = []
 invader_X = []
 invader_Y = []
@@ -106,12 +96,12 @@ def invader(x, y, i):
     screen.blit(invaderImage[i], (x, y))
 
 
-# --- 6. Bullet Setup ---
+#  Bullet Setup
 bullet_X = 0
 bullet_Y = screen_height - 100
 bullet_Xchange = 0
 bullet_Ychange = 3
-bullet_state = "rest"  # 'rest' means ready to fire, 'fire' means currently moving
+bullet_state = "rest"  
 
 
 def bullet(x, y):
@@ -120,9 +110,8 @@ def bullet(x, y):
     bullet_state = "fire"
 
 
-# --- 7. Collision Detection ---
+# Collision Detection 
 def isCollision(x1, y1, x2, y2):
-    # Distance formula for collision detection
     distance = math.sqrt((math.pow(x1 - x2, 2)) + (math.pow(y1 - y2, 2)))
     if distance < 50:
         return True
@@ -130,7 +119,7 @@ def isCollision(x1, y1, x2, y2):
         return False
 
 
-# --- 8. Game Loop ---
+# Game Loop 
 running = True
 game_active = True
 
@@ -158,25 +147,20 @@ while running:
             player_Xchange = 0
 
     if game_active:
-        # Player movement
         player_X += player_Xchange
 
-        # Boundary checks for player
         if player_X <= 16:
             player_X = 16
         elif player_X >= screen_width - 50:
             player_X = screen_width - 50
 
-        # Invader movement and boundaries
         for i in range(no_of_invaders):
             invader_X[i] += invader_Xchange[i]
 
-            # Invader boundary and movement
             if invader_X[i] >= screen_width - 64 or invader_X[i] <= 0:
-                invader_Xchange[i] *= -1  # Reverse direction
+                invader_Xchange[i] *= -1  
                 invader_Y[i] += invader_Ychange[i]  # Drop down
 
-            # Invader reaches player (Game Over condition)
             if invader_Y[i] >= player_Y - 100:
                 # Check for near horizontal collision before triggering game over
                 if abs(player_X - invader_X[i]) <= 80:
@@ -213,9 +197,7 @@ while running:
         show_score(scoreX, scoreY)
 
     else:
-        # If game is not active, show game over screen
         game_over()
-        # Optionally stop music here
         mixer.music.stop()
 
     pygame.display.update()
